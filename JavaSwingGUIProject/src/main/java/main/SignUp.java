@@ -5,6 +5,9 @@
  */
 package main;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 
@@ -352,7 +355,32 @@ public class SignUp extends javax.swing.JFrame {
         System.out.println(country);
         System.out.println(Subjects);
 
+        //db connection start
         
+        String host="localhost";
+        String port="3306";
+        String username="root";
+        String pw="1234";
+        String db="swing_gui_db";
+        
+        String url="jdbc:mysql://"+host+":"+port+"/"+db;
+        
+        try {
+            //like import the added libreary to project
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con=DriverManager.getConnection(url, username, pw);
+            
+            
+            Statement s=con.createStatement();
+            
+            String query="INSERT INTO user (fname,lname,email,password,gender,country,subjects) VALUES ('"+firstName+"','"+lastName+"','"+email+"','"+password+"','"+gender+"','"+country+"','"+Subjects+"')";
+            
+            s.execute(query);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //db connection end
         
         
         
