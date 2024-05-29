@@ -277,7 +277,7 @@ public class SignUp extends javax.swing.JFrame {
                 System.out.print(result.getString("password"));
                 System.out.print(result.getString("gender"));
                 System.out.println(result.getString("city"));
-                
+                System.out.println("------");
             }
         
         } catch (Exception e) {
