@@ -198,6 +198,7 @@ public class SignUp extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -225,6 +226,14 @@ public class SignUp extends javax.swing.JFrame {
         System.out.println(gender);
         System.out.println(country);
         
+        String query="INSERT INTO user (name,email,password,gender,city) VALUES ('"+name+"','"+email+"','"+password+"','"+gender+"','"+country+"')";
+        try {
+            MYSQL.sendQuery(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        /*
         //db connection start
         
         String host="localhost";
@@ -250,11 +259,15 @@ public class SignUp extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         //db connection end
+        */
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
+        /*
         String host="localhost";
         String port="3306";
         String username="root";
@@ -283,6 +296,26 @@ public class SignUp extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
+        
+        String query="SELECT * FROM user";
+        try {
+            ResultSet result=MYSQL.getData(query);
+            
+            while (result.next()) {                
+                System.out.print(result.getString("id"));
+                System.out.print(result.getString("name"));
+                System.out.print(result.getString("email"));
+                System.out.print(result.getString("password"));
+                System.out.print(result.getString("gender"));
+                System.out.println(result.getString("city"));
+                System.out.println("------");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
